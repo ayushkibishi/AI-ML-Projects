@@ -1,0 +1,33 @@
+📦 Multi-Store SKU Sales Forecasting
+
+🔍 Problem Statement
+Forecast daily sales for 50 SKUs across 10 stores using time-series machine learning.
+
+📊 Dataset
+- 10 stores
+- 50 SKUs
+- 2 years of daily sales
+- Promotions and pricing included
+
+⚙️ Techniques Used
+- Time series feature engineering
+- Lag features
+- Rolling averages
+- Label encoding
+- XGBoost regression
+
+🧠 Model
+- XGBoost Regressor
+
+📈 Evaluation Metric
+- Mean Absolute Error (MAE)
+
+🚀 Results
+Achieved accurate short-term demand forecasting across multiple stores and SKUs.
+
+🔮 Future Improvements
+- LSTM deep learning
+- Holiday effects
+- Prophet forecasting
+- Store clustering
+- Hierarchical forecasting
