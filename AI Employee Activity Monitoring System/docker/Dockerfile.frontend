@@ -1,0 +1,20 @@
+# Use standard Node runtime
+FROM node:24-alpine
+
+# Set directory
+WORKDIR /app
+
+# Copy dependency configs
+COPY frontend/package*.json ./
+
+# Install npm packages
+RUN npm install --legacy-peer-deps
+
+# Copy rest of the code
+COPY frontend/ ./
+
+# Expose Next.js port
+EXPOSE 3000
+
+# Start dev server
+CMD ["npm", "run", "dev"]
