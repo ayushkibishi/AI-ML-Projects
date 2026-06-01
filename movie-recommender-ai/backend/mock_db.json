@@ -1,0 +1,14 @@
+{
+    "users": {
+        "google_user": {
+            "uid": "google_user",
+            "createdAt": "2026-06-01T16:11:51.601503",
+            "email": "google_user@example.com",
+            "name": "Google User",
+            "updatedAt": "2026-06-01T16:41:10.285683"
+        }
+    },
+    "watchlists": {},
+    "ratings": {},
+    "reviews": {}
+}

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=true
+      - DATASET_TYPE=small
+      - TMDB_API_KEY=
+      - OMDB_API_KEY=
+      - GEMINI_API_KEY=
+      - FIREBASE_SERVICE_ACCOUNT_PATH=
+      - FIREBASE_SERVICE_ACCOUNT_JSON=
+    volumes:
+      # Persist the downloaded dataset
+      - ./data:/workspace/data
+      # Persist the trained model weights and mapping files
+      - ./models:/workspace/models
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+      - VITE_FIREBASE_API_KEY=
+      - VITE_FIREBASE_AUTH_DOMAIN=
+      - VITE_FIREBASE_PROJECT_ID=
+      - VITE_FIREBASE_STORAGE_BUCKET=
+      - VITE_FIREBASE_MESSAGING_SENDER_ID=
+      - VITE_FIREBASE_APP_ID=
+    depends_on:
+      - backend
