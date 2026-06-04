@@ -1,0 +1,22 @@
+FROM node:20-slim
+
+WORKDIR /app/frontend
+
+# Copy dependencies manifest
+COPY frontend/package*.json ./
+RUN npm ci
+
+# Copy configurations and codes
+COPY frontend/next.config.js frontend/tsconfig.json frontend/tailwind.config.js frontend/postcss.config.js ./
+COPY frontend/src/ ./src/
+
+# Disable telemetry for nextjs builds
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Compile Next.js bundle
+RUN npm run build
+
+# Expose port
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

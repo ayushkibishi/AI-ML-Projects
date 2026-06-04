@@ -1,0 +1,18 @@
+FROM node:20-slim
+
+WORKDIR /app/minecraft
+
+# Copy package configurations and install modules
+COPY minecraft/package*.json ./
+RUN npm ci
+
+# Copy ts configs and source codes
+COPY minecraft/tsconfig.json ./
+COPY minecraft/src/ ./src/
+COPY .env ../
+
+# Build TS files
+RUN npm run build
+
+# Start bot client
+CMD ["npm", "run", "start"]

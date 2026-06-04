@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./datasets:/app/datasets
+      - ./backend:/app/backend
+    restart: unless-stopped
+
+  minecraft-bot:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.minecraft
+    depends_on:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - BACKEND_HOST=backend
+      - MINECRAFT_HOST=host.docker.internal # Connects to Minecraft running on host PC
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    restart: unless-stopped

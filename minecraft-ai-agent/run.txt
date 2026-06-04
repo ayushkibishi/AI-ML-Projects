@@ -1,0 +1,53 @@
+=========================================================
+MINECRAFT AI AGENT STARTUP & EXECUTION GUIDE
+=========================================================
+
+To run the Minecraft AI Agent on your machine, follow these steps sequentially:
+
+---------------------------------------------------------
+1. START LOCAL MINECRAFT GAME
+---------------------------------------------------------
+1. Launch Minecraft (via TLauncher or standard launcher) on version 1.20.1.
+2. Select Singleplayer and load/create a world.
+3. Once in the world, press 'ESC' -> Click 'Open to LAN'.
+4. Ensure 'Allow Cheats: ON' is set, then click 'Start LAN World'.
+5. Look at the game chat and write down the 5-digit LAN port (e.g. 59367).
+
+---------------------------------------------------------
+2. UPDATE ENVIRONMENT VARIABLE SETTINGS
+---------------------------------------------------------
+1. Open the `.env` file at the project root folder.
+2. Update the `MINECRAFT_PORT` variable to match the 5-digit LAN port you just copied.
+3. Double check that your `GEMINI_API_KEY` is loaded:
+     GEMINI_API_KEY=your_gemini_api_key_here
+4. Save the `.env` file.
+
+---------------------------------------------------------
+3. RUN ENVIRONMENT SETUP (First Time Only)
+---------------------------------------------------------
+Open your terminal in the root folder and run:
+   python setup.py
+(This builds storage cache directories, copies env files, runs pip/npm package syncs, and downloads YOLO weights).
+
+---------------------------------------------------------
+4. LAUNCH ALL APPLICATION SERVICES
+---------------------------------------------------------
+Open three separate terminal windows/tabs:
+
+* TERMINAL WINDOW A: START FASTAPI BACKEND SERVER
+  cd backend
+  uvicorn backend.app.main:app --reload --port 8000
+
+* TERMINAL WINDOW B: START MINEFLAYER BOT CLIENT
+  cd minecraft
+  npm run dev
+
+* TERMINAL WINDOW C: START NEXT.JS DASHBOARD WEB APP
+  cd frontend
+  npm run dev
+
+---------------------------------------------------------
+5. INTERACT WITH THE NEURAL CONTROL DECK
+---------------------------------------------------------
+1. Open your browser and go to: http://localhost:3000
+2. The bot is now listening! Type or speak commands like "Collect wood logs" or "Defeat nearby zombies" in the Command Matrix box to watch it play autonomously.

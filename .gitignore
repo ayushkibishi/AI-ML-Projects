@@ -1,0 +1,17 @@
+venv/
+.venv/
+node_modules/
+**pycache**/
+
+datasets/
+runs/
+*.cache
+
+*.pt
+*.pth
+*.onnx
+*.h5
+
+*.mp4
+*.zip
+*.rar
