@@ -1,0 +1,9 @@
+python-chess==1.10.0
+gTTS==2.5.4
+sqlalchemy==2.0.48
+fastapi==0.136.3
+uvicorn==0.41.0
+opencv-python==4.11.0.86
+numpy==1.26.4
+pydantic==2.12.5
+python-multipart==0.0.24

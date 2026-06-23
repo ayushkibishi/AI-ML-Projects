@@ -1,0 +1,90 @@
+@import url('https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium');
+@import url('https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg');
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --background: transparent;
+  --foreground: #000000;
+  --primary: #000000;
+  --primary-hover: #1f1f1f;
+  --accent: #000000;
+  --accent-hover: #1f1f1f;
+  --card: rgba(255, 255, 255, 0.7);
+  --card-hover: rgba(255, 255, 255, 0.85);
+  --muted: #475569;
+  --border: rgba(0, 0, 0, 0.1);
+  --font-heading: 'HelveticaNowDisplay-Medium', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'HelveticaNowDisplayW01-Rg', 'Helvetica Neue', Arial, sans-serif;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-card: var(--card);
+  --color-card-hover: var(--color-card-hover);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  /* Mapping slate to light/charcoal values so all slate classes automatically adapt */
+  --color-slate-950: transparent;
+  --color-slate-900: rgba(255, 255, 255, 0.6);
+  --color-slate-800: rgba(255, 255, 255, 0.75);
+  --color-slate-700: #1e293b;
+  --color-slate-600: #334155;
+  --color-slate-500: #475569;
+  --color-slate-400: #64748b;
+  --color-slate-300: #94a3b8;
+  --color-slate-200: #cbd5e1;
+  --color-slate-100: #0f172a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.font-body {
+  font-family: var(--font-body) !important;
+}
+
+.font-heading {
+  font-family: var(--font-heading) !important;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes brand-shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.animated-brand-text {
+  background: linear-gradient(90deg, #000000, #4f46e5, #0891b2, #4f46e5, #000000);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: brand-shine 6s linear infinite;
+  display: inline-block;
+}

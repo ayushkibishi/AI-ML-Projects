@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Sign Detection</title>
+</head>
+<body>
+    <h2>Live Sign Detection</h2>
+
+    <video id="video" width="500" autoplay></video>
+    <h3 id="result">Sentence: </h3>
+
+
+    <br>
+    <a href="/dashboard">Back</a>
+    <button onclick="resetSentence()">Clear</button>
+
+
+<script>
+const video = document.getElementById("video");
+const resultText = document.getElementById("result");
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        video.srcObject = stream;
+    });
+
+setInterval(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    const imageData = canvas.toDataURL("image/jpeg");
+
+    fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: imageData })
+    })
+    .then(res => res.json())
+    .then(data => {
+       resultText.innerText = "Sentence: " + data.prediction;
+
+    });
+
+}, 500);
+function resetSentence() {
+    fetch("/reset", { method: "POST" })
+    .then(() => {
+        document.getElementById("result").innerText = "Sentence: ";
+    });
+}
+
+</script>
+
+</body>
+</html>
