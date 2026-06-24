@@ -15,6 +15,9 @@ import { useTypewriter } from '../hooks/useTypewriter';
 import BackgroundVideo from './components/BackgroundVideo';
 import MainframeNavbar from './components/MainframeNavbar';
 
+// Configurable API base URL — defaults to localhost for development
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 // Define the 10 supported games
 interface GameDef {
   id: string;
@@ -229,7 +232,7 @@ export default function Home() {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/history');
+      const res = await fetch(`${API_BASE_URL}/api/history`);
       if (res.ok) {
         const data = await res.json();
         setHistoryList(data);
@@ -326,14 +329,14 @@ export default function Home() {
     formData.append("game_type", selectedGame?.id || "");
 
     try {
-      const res = await fetch("http://localhost:8000/api/upload", {
+      const res = await fetch(`${API_BASE_URL}/api/upload`, {
         method: "POST",
         body: formData
       });
       if (res.ok) {
         const data = await res.json();
         if (data.warped_image_url) {
-          setWarpedImage(`http://localhost:8000${data.warped_image_url}`);
+          setWarpedImage(`${API_BASE_URL}${data.warped_image_url}`);
         }
         if (data.detected_state && data.detected_state.length > 0) {
           setBoardState(data.detected_state);
@@ -358,7 +361,7 @@ export default function Home() {
     setActiveBestMove(null);
 
     try {
-      const res = await fetch("http://localhost:8000/api/solve", {
+      const res = await fetch(`${API_BASE_URL}/api/solve`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
